@@ -67,8 +67,12 @@ function onConfigChanged()
 end
 
 function onClick()
-  -- The bar icon never stops a recording; it just opens the panel so the
-  -- stop button (in the panel header, next to the close X) is reachable.
+  -- The active widget is the same stop affordance documented by the plugin;
+  -- use the service so conversion, save paths and result state stay coherent.
+  if recording then
+    noctalia.state.set("command", { action = "recordStop" })
+    return
+  end
   local mode = noctalia.getConfig("panel-mode")
   local id = (mode == "legacy") and "alexander/screen-toolkit:panel-legacy" or "alexander/screen-toolkit:panel"
   noctalia.togglePanel(id)

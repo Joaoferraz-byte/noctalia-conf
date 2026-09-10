@@ -32,7 +32,7 @@ Region tools require a Wayland compositor with the relevant wlroots protocols. W
 
 ## Usage
 
-Add the widget to a bar and/or add the shortcut tile in the Noctalia control center. Left-click opens the configured panel; right-click on the bar widget quick-picks a color. During recording, the widget and shortcut expose the stop action.
+Add the widget to a bar and/or add the shortcut tile in the Noctalia control center. Left-click opens the configured panel; right-click on the bar widget quick-picks a color. During recording, the widget and shortcut send the service stop action instead of merely reopening the panel.
 
 The `panel-mode` setting selects `standard` or `legacy`. Both layouts use the same service and result panel:
 
@@ -45,7 +45,7 @@ noctalia msg panel-toggle alexander/screen-toolkit:result
 
 The standard panel groups the tools in a compact grid. Legacy mode preserves the v4-style layout and adds dedicated markup and recording subpanels. Capture results are copied to the clipboard and remain available in the result panel; temporary previews live under `/tmp` for the session.
 
-Available actions include color, OCR, QR, palette, Lens, measure, GIF/MP4 recording, markup and sharing. Recording can capture microphone and desktop audio according to its settings. The `hide-cursor` option applies to screenshots and recordings where the selected backend supports it.
+Available actions include color, OCR, QR, palette, Lens, measure, GIF/MP4 recording, markup and sharing. `recordToggle` starts a fullscreen MP4 through the same service and stops it on the next invocation. Recording can capture microphone and desktop audio according to its settings. The `hide-cursor` option applies to screenshots and recordings where the selected backend supports it.
 
 ## Settings
 

@@ -6,8 +6,7 @@ Os plugins ativos do Noctalia são mantidos como fontes locais versionadas neste
 | --- | --- | --- | ---: | --- | --- |
 | `cat` | `dotnetrob/cat` | seleção anterior do projeto | 3 | fonte local existente | barra/painel existentes |
 | `timer` | `noctalia/timer` | `noctalia-dev/official-plugins` em `8cb833c3e2502f57e49d34fa64386b4d66794b77` | 3 | nenhuma externa | barra/painel existentes |
-| `screen_recorder` | `noctalia/screen_recorder` | `noctalia-dev/official-plugins` em `8cb833c3e2502f57e49d34fa64386b4d66794b77` | 3 | `gpu-screen-recorder` | recorder existente; default `focused` e fallback CPU preservados |
-| `screen_toolkit` | `alexander/screen-toolkit` | `noctalia-dev/community-plugins` em `f1b74c2b5cbd5d16983bfdf46a3752d0cd84ffb4` | 13 | `grim`, `slurp`, `tesseract`, `zbar`, `ffmpeg`, `satty`/`swappy`, `imagemagick` | painel e shortcut; não adicionado à barra |
+| `screen_toolkit` | `alexander/screen-toolkit` | `noctalia-dev/community-plugins` em `f1b74c2b5cbd5d16983bfdf46a3752d0cd84ffb4` | 13 | `grim`, `slurp`, `tesseract`, `zbar`, `ffmpeg`, `satty`/`swappy`, `imagemagick`, `gpu-screen-recorder`, `wl-screenrec`, `wf-recorder` | painel, shortcut e widget da barra; owner único de captura e gravação |
 | `gamer_mode` | `nomadcxx/gamer-mode` | `noctalia-dev/community-plugins` em `f1b74c2b5cbd5d16983bfdf46a3752d0cd84ffb4` | 19 | `pgrep`, `pkill`, `systemctl`; `powerprofilesctl` opcional por host | painel via `Mod+G`; sem widget na barra |
 | `prismlauncher_instances` | `radimous/prismlauncher-instances` | `noctalia-dev/community-plugins` em `f1b74c2b5cbd5d16983bfdf46a3752d0cd84ffb4` | 3 | `flatpak` | provider `/pl` adaptado para FreeSM Flatpak |
 | `bitwarden` | `noctalia/bitwarden` | `noctalia-dev/official-plugins` em `8cb833c3e2502f57e49d34fa64386b4d66794b77` | 8 | `bitwarden-cli` (`bw`) | provider `/bw`; login e unlock continuam interativos |
@@ -16,7 +15,7 @@ Os manifestos upstream declaram licença MIT. Os diretórios foram copiados apó
 
 ## Política de screenshot
 
-O atalho `Mod+Shift+S` usa `noctalia msg screenshot-region`, o fluxo nativo baseado em `wlr-screencopy`. A política global em `config/noctalia/config.toml` salva PNG, copia para o clipboard, congela a tela durante a seleção, lembra a última região e não inclui o cursor. `Mod+Shift+P` abre o painel do Screen Toolkit para anotação, OCR, QR/barcode, extração de paleta, medição e gravação. Os utilitários necessários são instalados pelo módulo `nix-conf/modules/features/niri.nix`.
+O atalho `Mod+Shift+S` usa a ação `annotate` do Screen Toolkit: `slurp` seleciona a região, `grim` captura e `satty`/`swappy` fornece a anotação, salvando em `screenshot-path`. `Mod+Shift+P` permanece como alias para abrir o painel; `Mod+K` é o atalho principal do popup. O widget da barra é `alexander/screen-toolkit:widget`; quando uma gravação está ativa, clicar nele envia `recordStop` ao mesmo serviço. Os utilitários necessários são instalados pelo módulo `nix-conf/modules/features/niri.nix`.
 
 ## Política de serviços
 

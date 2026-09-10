@@ -958,6 +958,9 @@ local HANDLERS = {
   annotate = annotateRegion, annotateFullscreen = annotateFullscreen, annotateWindow = annotateWindow,
   record = function() runRecordRegion("gif") end, recordMp4 = function() runRecordRegion("mp4") end,
   recordFullscreen = function() runRecordFullscreen("gif") end, recordFullscreenMp4 = function() runRecordFullscreen("mp4") end,
+  recordToggle = function()
+    if recordState == "recording" then recordStop() else runRecordFullscreen("mp4") end
+  end,
   recordStop = recordStop,
   recordSave = function(payload) finalizeRecord((type(payload) == "table" and payload.format or nil) or recordFormat, false) end,
   recordCopy = function() finalizeRecord(recordFormat, true) end, recordDiscard = recordDiscard,
@@ -977,7 +980,7 @@ local HANDLERS = {
 local CAPTURE_STARTS = {
   colorPicker = true, ocr = true, qr = true, palette = true, lens = true,
   measure = true, annotate = true, annotateFullscreen = true, annotateWindow = true,
-  record = true, recordMp4 = true, recordFullscreen = true, recordFullscreenMp4 = true,
+  record = true, recordMp4 = true, recordFullscreen = true, recordFullscreenMp4 = true, recordToggle = true,
 }
 
 local function dispatch(event, payload)

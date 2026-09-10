@@ -6,7 +6,6 @@
 enabled = [
   "dotnetrob/cat",
   "noctalia/timer",
-  "noctalia/screen_recorder",
   "alexander/screen-toolkit",
   "nomadcxx/gamer-mode",
   "radimous/prismlauncher-instances",
@@ -14,13 +13,11 @@ enabled = [
 ]
 auto_update = "none"
 
-[plugin_settings."noctalia/screen_recorder"]
-video_source = "focused"
-
 [plugin_settings."alexander/screen-toolkit"]
 screenshot-path = "~/Pictures/Screenshots"
 video-path = "~/Videos/Screen-Toolkit"
 filename-format = "%Y-%m-%d_%H-%M-%S"
+selected-ocr-lang = "eng"
 record-audio-out = false
 record-audio-in = false
 hide-cursor = true
@@ -28,6 +25,7 @@ record-codec = "h264"
 record-fps = 60
 record-skip-confirmation = false
 record-copy-to-clipboard = false
+gif-max-seconds = 30
 panel-mode = "standard"
 
 [plugin_settings."nomadcxx/gamer-mode"]
@@ -321,14 +319,14 @@ widget_spacing = 10
 start = ["control-center", "workspaces", "sysmon"]
 center = ["cat", "clock"]
 # Battery is inserted by the host-specific Home Manager adapter on latitude.
-end = ["media", "bar", "recorder", "notifications", "session"]
+end = ["media", "bar", "screen_toolkit", "notifications", "session"]
 
 [widget.bar]
 type = "noctalia/timer:bar"
 show_idle_on_horizontal = false
 
-[widget.recorder]
-type = "noctalia/screen_recorder:recorder"
+[widget.screen_toolkit]
+type = "alexander/screen-toolkit:widget"
 
 [widget.cat]
 type = "dotnetrob/cat:cat"
