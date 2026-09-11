@@ -25,8 +25,8 @@
         let
           batteryOnBar = (desktopProfile.monitorProfile or null) == "latitude";
           barEnd = if batteryOnBar
-            then ''end = ["media", "bar", "screen_toolkit", "notifications", "battery", "session"]''
-            else ''end = ["media", "bar", "screen_toolkit", "notifications", "session"]'';
+            then ''end = ["recorder", "media", "bar", "screen_toolkit", "notifications", "battery", "session"]''
+            else ''end = ["recorder", "media", "bar", "screen_toolkit", "notifications", "session"]'';
         in
         pkgs.writeText "noctalia-config.toml" (builtins.replaceStrings
           [
@@ -40,7 +40,7 @@
             "@NOCTALIA_HEROIC_TEMPLATE@"
             "@NOCTALIA_PRISM_TEMPLATE@"
             "@NOCTALIA_NIRI_TEMPLATE@"
-            "end = [\"media\", \"bar\", \"screen_toolkit\", \"notifications\", \"session\"]"
+            "end = [\"recorder\", \"media\", \"bar\", \"screen_toolkit\", \"notifications\", \"session\"]"
           ]
           [
             "${configDirectory}/templates/livara-palette.json"
@@ -68,6 +68,7 @@
           xdg.dataFile = {
             "noctalia/plugins/cat".source = pluginDirectory + "/cat";
             "noctalia/plugins/timer".source = pluginDirectory + "/timer";
+            "noctalia/plugins/screen_recorder".source = pluginDirectory + "/screen_recorder";
             "noctalia/plugins/screen_toolkit".source = pluginDirectory + "/screen_toolkit";
             "noctalia/plugins/gamer_mode".source = pluginDirectory + "/gamer_mode";
             "noctalia/plugins/prismlauncher_instances".source = pluginDirectory + "/prismlauncher_instances";
@@ -121,6 +122,9 @@
           plugin-manifests = pkgs.runCommand "livara-noctalia-plugin-manifest-check" { } ''
             grep -q '^id[[:space:]]*=[[:space:]]*"dotnetrob/cat"' ${pluginDirectory}/cat/plugin.toml
             grep -q '^id[[:space:]]*=[[:space:]]*"noctalia/timer"' ${pluginDirectory}/timer/plugin.toml
+            grep -q '^id[[:space:]]*=[[:space:]]*"noctalia/screen_recorder"' ${pluginDirectory}/screen_recorder/plugin.toml
+            grep -q '^default[[:space:]]*=[[:space:]]*"focused"' ${pluginDirectory}/screen_recorder/plugin.toml
+            grep -q 'fallback-cpu-encoding yes' ${pluginDirectory}/screen_recorder/recorder_service.luau
             grep -q '^plugin_api[[:space:]]*=[[:space:]]*[0-9]' ${pluginDirectory}/cat/plugin.toml
             grep -q '^id[[:space:]]*=[[:space:]]*"alexander/screen-toolkit"' ${pluginDirectory}/screen_toolkit/plugin.toml
             grep -q '^id[[:space:]]*=[[:space:]]*"nomadcxx/gamer-mode"' ${pluginDirectory}/gamer_mode/plugin.toml
