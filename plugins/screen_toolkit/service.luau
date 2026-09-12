@@ -785,6 +785,7 @@ end
 local function finalizeRecord(format, copyToClipboard)
   if rawPath == "" then return end
   local destDir = videoDir()
+  noctalia.mkdirAll(destDir)
   local ext
   if format == "gif" then ext = ".gif" elseif format == "mov" then ext = ".mov" else ext = ".mp4" end
   local dest = destDir .. "/" .. buildFilename("record", ext)

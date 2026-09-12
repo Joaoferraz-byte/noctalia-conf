@@ -52,6 +52,7 @@ case "$ACTION" in
     [ -n "$INPUT"  ] || { echo "ERROR: convert-mp4: missing <input>"          >&2; exit 1; }
     [ -n "$OUTPUT" ] || { echo "ERROR: convert-mp4: missing <output>"         >&2; exit 1; }
     [ -f "$INPUT"  ] || { echo "ERROR: convert-mp4: file not found: $INPUT"   >&2; exit 2; }
+    mkdir -p "$(dirname -- "$OUTPUT")"
     _require ffmpeg
     if [ "$RECODE" = "--recode" ]; then
         ffmpeg -y -i "$INPUT" \
@@ -72,6 +73,7 @@ case "$ACTION" in
     [ -n "$INPUT"  ] || { echo "ERROR: convert-gif: missing <input>"          >&2; exit 1; }
     [ -n "$OUTPUT" ] || { echo "ERROR: convert-gif: missing <output>"         >&2; exit 1; }
     [ -f "$INPUT"  ] || { echo "ERROR: convert-gif: file not found: $INPUT"   >&2; exit 2; }
+    mkdir -p "$(dirname -- "$OUTPUT")"
     _require ffmpeg
     DURATION=""
     if [ -n "$MAXSEC" ] && [ "$MAXSEC" -gt 0 ] 2>/dev/null; then
@@ -94,6 +96,7 @@ case "$ACTION" in
     [ -n "$INPUT"  ] || { echo "ERROR: convert-mov: missing <input>"          >&2; exit 1; }
     [ -n "$OUTPUT" ] || { echo "ERROR: convert-mov: missing <output>"         >&2; exit 1; }
     [ -f "$INPUT"  ] || { echo "ERROR: convert-mov: file not found: $INPUT"   >&2; exit 2; }
+    mkdir -p "$(dirname -- "$OUTPUT")"
     _require ffmpeg
     ffmpeg -y -i "$INPUT" -c copy -movflags +faststart "$OUTPUT" 2>/dev/null \
         || { echo "ERROR: convert-mov: ffmpeg failed" >&2; exit 4; }
