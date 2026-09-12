@@ -246,6 +246,7 @@ end
 local function outputDirectory()
     local configured = cfg("directory")
     local dir = if configured == "" then noctalia.expandPath("~/Videos/Recordings") else noctalia.expandPath(configured)
+    noctalia.mkdirAll(dir)
     if dir:sub(-1) ~= "/" then
         dir ..= "/"
     end

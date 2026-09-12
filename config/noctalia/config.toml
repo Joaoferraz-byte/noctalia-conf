@@ -17,6 +17,9 @@ auto_update = "none"
 [plugin_settings."alexander/screen-toolkit"]
 screenshot-path = "~/Pictures/Screenshots"
 video-path = "~/Videos/Recordings"
+record-skip-confirmation = true
+record-copy-to-clipboard = false
+gif-max-seconds = 30
 filename-format = "%Y-%m-%d_%H-%M-%S"
 selected-ocr-lang = "eng"
 record-audio-out = false
@@ -24,9 +27,6 @@ record-audio-in = false
 hide-cursor = true
 record-codec = "h264"
 record-fps = 60
-record-skip-confirmation = false
-record-copy-to-clipboard = false
-gif-max-seconds = 30
 panel-mode = "standard"
 
 [plugin_settings."noctalia/screen_recorder"]
