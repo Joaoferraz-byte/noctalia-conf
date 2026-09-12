@@ -43,6 +43,8 @@ home-manager.sharedModules = [
 
 The shell support module imports `inputs.noctalia-conf.homeModules.default`. This keeps Noctalia's source of truth in one repository while allowing `shell-conf` to connect it to session helpers, application adapters and the host profile.
 
+The official `noctalia/screen_recorder` plugin owns the recording indicator shown in the bar and fullscreen recording. The `alexander/screen-toolkit` plugin owns the screen-tools panel and region tools, including GIF/MP4 region capture; its bar widget is intentionally not placed in the bar.
+
 ## Wallpaper policy
 
 Wallpaper selection is manual. The wallpaper picker remains available, while `[wallpaper.automation].enabled = false` prevents Noctalia from changing the wallpaper at startup or on a timer. The selected wallpaper still feeds Noctalia's palette and downstream templates.

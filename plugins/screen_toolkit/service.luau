@@ -662,13 +662,10 @@ local function buildRecorderCommand(bin, geom, out)
       local gx, gy, gw, gh = tostring(geom):match("^(-?%d+),(-?%d+) (%d+)x(%d+)$")
       if gx then target = string.format("-w region -region %sx%s+%s+%s", gw, gh, gx, gy) end
     else
-      local fg = focusedGeometry()
-      if fg then
-        local fx, fy, fw, fh = fg:match("^(-?%d+),(-?%d+) (%d+)x(%d+)$")
-        if fx then target = string.format("-w region -region %sx%s+%s+%s", fw, fh, fx, fy) end
-      end
+      local focused = noctalia.focusedOutputName()
+      if focused and focused ~= "" then target = "-w " .. shellQuote(focused) end
     end
-    return string.format("gpu-screen-recorder %s -f %d -k %s -bm qp -ffmpeg-opts qp=25 -cursor %s -cr limited %s -v no -o %s", target, fps, codec, cursor, gsrAudioFlags(), shellQuote(out))
+    return string.format("gpu-screen-recorder %s -c mp4 -f %d -k %s -fallback-cpu-encoding yes -bm qp -ffmpeg-video-opts qp=25 -cursor %s -cr limited %s -v no -o %s", target, fps, codec, cursor, gsrAudioFlags(), shellQuote(out))
   end
 
   local isWl = bin == "wl-screenrec"
